@@ -1,0 +1,219 @@
+/* A carta: container de vidro, tipografia e blocos internos */
+
+.page {
+  position: relative;
+  z-index: 3;
+  width: min(1080px, calc(100% - 28px));
+  margin: 58px auto 86px;
+}
+
+.letter {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(32px, 6vw, 72px);
+  border-radius: 4px;
+  color: var(--ink);
+  /* Vidro fosco: o papel é translúcido (o quadro aparece por trás), mas o
+     `backdrop-filter` clareia e borra o que passa, então o texto escuro
+     continua legível. Alpha se ajusta em tokens.css. */
+  background: linear-gradient(135deg,
+    var(--paper-1) 0%,
+    var(--paper-2) 48%,
+    var(--paper-3) 100%);
+  box-shadow:
+    0 35px 100px rgba(2, 14, 32, .46),
+    0 0 0 6px rgba(6, 20, 38, .12),
+    inset 0 1px 0 rgba(255, 255, 255, .70);
+  -webkit-backdrop-filter: blur(22px) saturate(150%) brightness(1.28);
+  backdrop-filter: blur(22px) saturate(150%) brightness(1.28);
+}
+
+/* Sem backdrop-filter (Firefox antigo, etc.) a transparência sozinha deixaria
+   o texto escuro sobre o azul-escuro do quadro. Aí o papel fica mais denso. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .letter {
+    background: linear-gradient(135deg,
+      rgba(255, 252, 243, .90) 0%,
+      rgba(253, 246, 228, .88) 48%,
+      rgba(240, 247, 252, .87) 100%);
+  }
+}
+
+/* A moldura de pinceladas das quatro bordas está em ornaments.css (.letter::after) */
+
+.glass-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 5%, rgba(255, 214, 92, .16), transparent 30%),
+    radial-gradient(circle at 92% 32%, rgba(83, 151, 199, .10), transparent 36%),
+    linear-gradient(180deg, rgba(255, 255, 255, .18), transparent 22%);
+}
+
+/* tudo fica acima do brilho de vidro */
+.letter > *:not(.glass-glow) {
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- tipografia ---------- */
+
+/* Sem text-shadow: com o papel opaco ele só serve para borrar as letras. */
+.letter h1 {
+  display: inline-block;   /* encolhe até o tamanho da palavra, senão o degradê
+                              se esticaria pela largura toda do cartão */
+  margin: 0 0 24px;
+  color: #0a2038;
+  font-weight: 500;
+  font-size: clamp(40px, 8vw, 64px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+
+/* O nome recebe as cores do quadro: azul-noite, cobalto e o amarelo.
+   O amarelo vivo entra como um brilho curto entre dois ocres — sozinho e
+   esticado ele daria 1,5:1 sobre o papel creme e a palavra clarearia demais.
+   Assim ele aparece como luz batendo nas letras, sem derrubar a leitura. */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .letter h1 {
+    background-image: linear-gradient(104deg,
+      #0a2038 0%,
+      #16497e 14%,
+      #2b6ca3 28%,
+      #3a7fb4 38%,
+      #b8791a 50%,
+      #f2c231 60%,
+      #c8901a 70%,
+      #1b5a92 86%,
+      #0d3560 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.letter p {
+  margin: 0 0 var(--gap-p);
+  color: #10243c;
+  font-weight: 400;
+  font-size: clamp(17px, 2.5vw, 20px);
+}
+
+/* ---------- blocos ---------- */
+
+.special {
+  margin: 1.4em 0;
+  padding: 15px 18px;
+  border-radius: 15px;
+  color: #082440;
+  font-weight: 700;
+  background: linear-gradient(90deg, rgba(244, 196, 48, .16), rgba(43, 108, 163, .07));
+}
+
+/* Frases dela / minhas citadas dentro da carta. */
+.quote {
+  margin: 1.3em 0;
+  padding: 4px 0 4px 22px;
+  border-left: 3px solid rgba(43, 108, 163, .42);
+}
+
+.quote p {
+  margin: 0;
+  color: #1c3a5c;
+  font-style: italic;
+}
+
+/* citação com várias linhas (uma sequência de mensagens) */
+.quote p + p {
+  margin-top: .34em;
+}
+
+/* A resposta que originou tudo isso: mesma citação, com peso. */
+.quote-strong {
+  border-left-color: #e2aa1d;
+}
+
+.quote-strong p {
+  color: #0a2038;
+  font-weight: 700;
+  font-size: 1.06em;
+}
+
+/* Declaração: peso sem moldura, para as frases que não são conclusão de nada. */
+.declaration {
+  font-size: 1.1em;
+  font-weight: 700;
+  color: #0a2038;
+}
+
+/* Grupo de frases curtas que devem respirar juntas, como versos. */
+.stanza {
+  margin: 0 0 var(--gap-p);
+}
+
+.stanza p {
+  margin: 0 0 var(--gap-line);
+}
+
+.stanza p:last-child {
+  margin-bottom: 0;
+}
+
+.apocalypse {
+  position: relative;
+  overflow: hidden;
+  margin: 28px -6px;
+  padding: 27px 28px;
+  border: 1px solid var(--line);
+  border-left: 5px solid #e2aa1d;
+  border-radius: 0 20px 20px 0;
+  background:
+    radial-gradient(circle at 92% 12%, rgba(255, 217, 90, .30) 0 5px, transparent 6px),
+    radial-gradient(circle at 85% 19%, rgba(255, 217, 90, .16) 0 11px, transparent 12px),
+    linear-gradient(135deg, rgba(43, 108, 163, .10), rgba(244, 196, 48, .18));
+  box-shadow: inset 0 0 45px rgba(255, 255, 255, .28);
+}
+
+.apocalypse::after {
+  content: "✦  ✧  ✦";
+  position: absolute;
+  top: 11px;
+  right: 16px;
+  color: rgba(218, 157, 13, .62);
+  font-size: 13px;
+  letter-spacing: .18em;
+}
+
+.closing {
+  margin-top: 1.9em;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.signature {
+  display: inline-block;
+  margin-top: 1.7em;
+  color: var(--ink);
+  font-size: 1.12em;
+  font-style: italic;
+}
+
+/* O fio de gradiente das bordas está em ornaments.css (.ps::after) */
+.ps {
+  position: relative;
+  margin-top: 30px;
+  padding: 18px 22px;
+  border-radius: 4px;
+  color: #45566d;
+  background: rgba(255, 250, 238, .38);
+  font-size: .95em;
+  font-style: italic;
+}
+
+/* P.S. seguido de P.S. 2 — ficam colados como um bloco só */
+.ps + .ps {
+  margin-top: 12px;
+}

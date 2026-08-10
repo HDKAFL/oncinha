@@ -1,0 +1,9 @@
+/* Ponto de entrada: a ordem dos imports importa (cascata). */
+@import url("tokens.css");
+@import url("base.css");
+@import url("background.css");
+@import url("letter.css");
+@import url("ornaments.css");
+@import url("tracks.css");
+@import url("cover.css");
+@import url("responsive.css");

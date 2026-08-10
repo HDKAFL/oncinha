@@ -1,0 +1,44 @@
+/* Paleta e variáveis globais */
+:root {
+  --night: #061426;
+  --night2: #0b2c52;
+  --cobalt: #174f88;
+  --blue: #2b6ca3;
+  --sky: #72a9c8;
+  --cream: #fff8d8;
+  --paper: #fffaf0;
+  --ink: #071a33;
+  --gold: #f4c430;
+  --gold2: #ffd95a;
+  --orange: #d98c1d;
+
+  --line: rgba(23, 79, 136, .16);
+  --shadow: 0 35px 100px rgba(2, 14, 32, .42);
+
+  --font-body: Georgia, "Times New Roman", serif;
+
+  /* ---- Respiro do texto (os dois botões de ajuste) ----
+     --leading  espaço ENTRE AS LINHAS de um mesmo parágrafo
+     --gap-p    espaço ENTRE PARÁGRAFOS
+     --gap-line espaço entre as linhas curtas de um bloco de versos          */
+  --leading: 1.62;
+  --gap-p: .85em;
+  --gap-line: .22em;
+
+  /* ---- Vidro da carta ----
+     Este é o botão de ajuste: quanto MENOR o último número (alpha), mais o
+     quadro aparece por trás do texto — e menos contraste sobra.
+     ~.70 = vidro fosco com boa leitura. Abaixo de ~.60 o texto começa a sofrer. */
+  --paper-1: rgba(255, 252, 243, .74);
+  --paper-2: rgba(253, 246, 228, .71);
+  --paper-3: rgba(240, 247, 252, .69);
+
+  /* No celular o blur é mais leve (bateria), então o vidro compensa sendo mais denso. */
+  --paper-mobile-1: rgba(255, 252, 243, .82);
+  --paper-mobile-2: rgba(253, 246, 228, .79);
+  --paper-mobile-3: rgba(240, 247, 252, .78);
+
+  /* Dois pontos de quebra, com papéis diferentes:
+       <= 1024px  celular e tablet: capa de abertura, imagem inteira no fundo
+       <=  560px  só celular: padding e tipografia mais compactos            */
+}

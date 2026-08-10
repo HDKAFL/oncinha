@@ -1,0 +1,17 @@
+node_modules/
+
+# Versões antigas guardadas só na sua máquina — não vão para o site
+legacy/
+
+# Ferramentas locais
+.claude/
+
+# SO / editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# logs
+*.log
+npm-debug.log*

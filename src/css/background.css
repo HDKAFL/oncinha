@@ -1,0 +1,41 @@
+/* Quadro de fundo (fixo) + versão mobile do quadro.
+   A imagem é exibida crua: sem véu, sem vinheta, sem opacidade. */
+
+.painting {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--night);
+
+  /* No celular a barra do navegador some ao rolar e a altura da tela muda.
+     Com `inset: 0` o fundo redimensionava junto e parecia "andar".
+     `lvh` é a altura máxima da tela, então a imagem fica travada. */
+  height: 100vh;    /* usado por navegador que não conhece lvh */
+  height: 100lvh;
+}
+
+.painting picture,
+.painting img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Desktop e tablet usam a imagem deitada; o celular recebe a em pé pelo
+   <picture> do index.html. Nos três casos ela preenche a tela. */
+.painting img {
+  object-fit: cover;
+  object-position: center;  /* mude para "center top" se quiser priorizar o topo */
+}
+
+.footer-star {
+  margin: 40px auto 0;
+  text-align: center;
+  color: #f6d454;
+  text-shadow: 0 0 15px rgba(246, 212, 84, .8);
+  font-size: 24px;
+  letter-spacing: .35em;
+}

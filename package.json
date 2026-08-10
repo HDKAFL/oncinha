@@ -1,0 +1,14 @@
+{
+  "name": "para-fernanda",
+  "version": "1.0.0",
+  "description": "Carta estilizada com tema Van Gogh para uso local e deploy estático.",
+  "private": true,
+  "scripts": {
+    "dev": "live-server --port=3000 --open=/index.html",
+    "start": "npm run dev",
+    "serve": "live-server --port=3000 --no-browser"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

@@ -1,0 +1,45 @@
+name: Publicar no GitHub Pages
+
+# Publica a cada push na branch principal, e também sob demanda pelo botão
+# "Run workflow" na aba Actions.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Permissões exigidas pelo deploy oficial do Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Se dois pushes acontecerem juntos, o segundo espera o primeiro terminar
+# em vez de disputar o mesmo ambiente. `cancel-in-progress: false` evita
+# interromper um deploy no meio.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  # A página é HTML, CSS e JS puros: não há build, só empacotar e enviar.
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
+    steps:
+      - name: Baixar o repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar o Pages
+        uses: actions/configure-pages@v5
+
+      - name: Empacotar o site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Publicar
+        id: deploy
+        uses: actions/deploy-pages@v4

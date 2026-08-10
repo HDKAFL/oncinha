@@ -1,0 +1,56 @@
+/* Ornamentos Van Gogh: a moldura de pinceladas e a textura do papel.
+   Tudo aqui é decoração; nada deste arquivo pode atrapalhar a leitura. */
+
+/* ---------- 1. Fio de gradiente nas quatro bordas ---------- */
+/* Um fio fino contornando a caixa, percorrendo as cores do quadro:
+   azul-noite no canto superior esquerdo, cobalto no direito, dourado embaixo
+   à direita e ocre embaixo à esquerda. Cada lado é uma faixa com o pedaço do
+   degradê que continua o lado anterior, então a volta fecha sem emenda.
+
+   Não dá para usar `border` com degradê aqui: o papel é translúcido, e a
+   técnica de borda em degradê pintaria o miolo também. Como faixas, só as
+   bordas recebem tinta. */
+.letter::after,
+.ps::after,
+.track::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+
+  background-repeat: no-repeat;
+  background-image:
+    linear-gradient(90deg,  #0a2f57, #2b6ca3),   /* topo:     noite  -> cobalto */
+    linear-gradient(180deg, #2b6ca3, #f4c430),   /* direita:  cobalto -> dourado */
+    linear-gradient(90deg,  #d98c1d, #f4c430),   /* base:     ocre    -> dourado */
+    linear-gradient(180deg, #0a2f57, #d98c1d);   /* esquerda: noite   -> ocre */
+  background-position: left top, right top, left bottom, left top;
+}
+
+.letter::after {
+  background-size: 100% 3px, 3px 100%, 100% 3px, 3px 100%;
+}
+
+.ps::after,
+.track::after {
+  background-size: 100% 2px, 2px 100%, 100% 2px, 2px 100%;
+}
+
+/* ---------- 2. Textura de impasto no papel ---------- */
+/* Pinceladas curtas quase invisíveis: tiram o aspecto de retângulo liso. */
+.impasto {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-repeat: repeat;
+  background-size: 150px 150px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cg fill='none' stroke-linecap='round' stroke-width='3'%3E%3Cpath d='M8 20 C 28 10, 46 17, 64 8' stroke='rgba(23,79,136,0.06)'/%3E%3Cpath d='M78 32 C 96 24, 118 31, 144 22' stroke='rgba(200,130,25,0.055)'/%3E%3Cpath d='M4 56 C 26 47, 44 58, 62 49' stroke='rgba(23,79,136,0.05)'/%3E%3Cpath d='M80 70 C 100 61, 120 70, 146 60' stroke='rgba(23,79,136,0.055)'/%3E%3Cpath d='M10 94 C 30 85, 50 94, 68 85' stroke='rgba(200,130,25,0.05)'/%3E%3Cpath d='M82 112 C 102 103, 122 112, 146 102' stroke='rgba(23,79,136,0.055)'/%3E%3Cpath d='M6 128 C 28 119, 46 128, 66 118' stroke='rgba(23,79,136,0.045)'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ---------- 3. Ajustes de mobile ---------- */
+@media (max-width: 560px) {
+  .letter::after {
+    background-size: 100% 2px, 2px 100%, 100% 2px, 2px 100%;
+  }
+}

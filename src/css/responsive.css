@@ -1,0 +1,36 @@
+/* Ajustes de mobile (<= 560px) e animação de entrada dos parágrafos */
+
+@media (max-width: 560px) {
+  .page {
+    width: min(100% - 18px, 820px);
+    margin: 0 auto 42px;
+  }
+
+  .letter {
+    padding: 31px 22px 38px;
+    border-radius: 4px;
+    background: linear-gradient(135deg,
+      var(--paper-mobile-1) 0%,
+      var(--paper-mobile-2) 55%,
+      var(--paper-mobile-3) 100%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%) brightness(1.22);
+    backdrop-filter: blur(14px) saturate(140%) brightness(1.22);
+  }
+
+  .apocalypse {
+    margin: 30px 0;
+    padding: 23px 20px;
+  }
+}
+
+/* Entrada suave — só é aplicada se o JS carregar (falha segura). */
+.js-reveal .letter > *:not(.glass-glow) {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.js-reveal .letter > .is-visible {
+  opacity: 1;
+  transform: none;
+  transition: opacity .7s ease, transform .7s ease;
+}

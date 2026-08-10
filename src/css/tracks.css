@@ -1,0 +1,70 @@
+/* Cartões de música no fim da página. Cada um abre a faixa no Spotify. */
+
+.playlist {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(216px, 1fr));
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.track {
+  position: relative;   /* o fio de gradiente é um ::after (ver ornaments.css) */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 18px 20px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  background: linear-gradient(135deg,
+    var(--paper-1) 0%,
+    var(--paper-2) 48%,
+    var(--paper-3) 100%);
+  -webkit-backdrop-filter: blur(22px) saturate(150%) brightness(1.28);
+  backdrop-filter: blur(22px) saturate(150%) brightness(1.28);
+  box-shadow: 0 14px 34px rgba(2, 14, 32, .28);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.track:hover,
+.track:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 44px rgba(2, 14, 32, .38);
+}
+
+.track:focus-visible {
+  outline: 2px solid #d98c1d;
+  outline-offset: 3px;
+}
+
+.track-icon {
+  width: 22px;
+  height: 22px;
+  margin-bottom: 6px;
+  color: #c88a12;
+}
+
+.track-title {
+  color: #10243c;
+  font-size: 1.02em;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.track-artist {
+  color: #45566d;
+  font-size: .88em;
+  font-style: italic;
+}
+
+@media (max-width: 560px) {
+  .playlist {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .track {
+    padding: 15px 17px 17px;
+  }
+}

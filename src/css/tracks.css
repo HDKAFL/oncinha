@@ -2,9 +2,16 @@
 
 .playlist {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(216px, 1fr));
+  grid-template-columns: repeat(4, 1fr);   /* os quatro lado a lado no desktop */
   gap: 14px;
   margin-top: 26px;
+}
+
+/* Celular e tablet: dois por linha, formando um quadrado 2x2 */
+@media (max-width: 1024px) {
+  .playlist {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .track {
@@ -59,12 +66,27 @@
 
 @media (max-width: 560px) {
   .playlist {
-    grid-template-columns: 1fr;
     gap: 10px;
     margin-top: 20px;
   }
 
+  /* Com duas colunas numa tela estreita, o cartão fica apertado:
+     menos respiro e tipos um pouco menores para os títulos longos caberem. */
   .track {
-    padding: 15px 17px 17px;
+    padding: 14px 14px 16px;
+  }
+
+  .track-icon {
+    width: 19px;
+    height: 19px;
+    margin-bottom: 4px;
+  }
+
+  .track-title {
+    font-size: .95em;
+  }
+
+  .track-artist {
+    font-size: .82em;
   }
 }

@@ -13,30 +13,14 @@
   padding: clamp(32px, 6vw, 72px);
   border-radius: 4px;
   color: var(--ink);
-  /* Vidro fosco: o papel é translúcido (o quadro aparece por trás), mas o
-     `backdrop-filter` clareia e borra o que passa, então o texto escuro
-     continua legível. Alpha se ajusta em tokens.css. */
-  background: linear-gradient(135deg,
-    var(--paper-1) 0%,
-    var(--paper-2) 48%,
-    var(--paper-3) 100%);
+  /* Papel opaco. Havia um `backdrop-filter` aqui que borrava o quadro atrás do
+     cartão — mas o navegador refazia esse borrão a cada quadro da rolagem, numa
+     área de milhares de pixels de altura, e isso travava o celular. */
+  background: linear-gradient(135deg, #fffdf7 0%, #fdf7e9 55%, #f4f8fc 100%);
   box-shadow:
     0 35px 100px rgba(2, 14, 32, .46),
     0 0 0 6px rgba(6, 20, 38, .12),
     inset 0 1px 0 rgba(255, 255, 255, .70);
-  -webkit-backdrop-filter: blur(22px) saturate(150%) brightness(1.28);
-  backdrop-filter: blur(22px) saturate(150%) brightness(1.28);
-}
-
-/* Sem backdrop-filter (Firefox antigo, etc.) a transparência sozinha deixaria
-   o texto escuro sobre o azul-escuro do quadro. Aí o papel fica mais denso. */
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .letter {
-    background: linear-gradient(135deg,
-      rgba(255, 252, 243, .90) 0%,
-      rgba(253, 246, 228, .88) 48%,
-      rgba(240, 247, 252, .87) 100%);
-  }
 }
 
 /* A moldura de pinceladas das quatro bordas está em ornaments.css (.letter::after) */

@@ -17,30 +17,14 @@
      cartão — mas o navegador refazia esse borrão a cada quadro da rolagem, numa
      área de milhares de pixels de altura, e isso travava o celular. */
   background: linear-gradient(135deg, #fffdf7 0%, #fdf7e9 55%, #f4f8fc 100%);
+  /* A sombra tinha 100px de desfoque. Desfoque é calculado na CPU, e num
+     elemento desta altura o celular não conseguia acompanhar a rolagem. */
   box-shadow:
-    0 35px 100px rgba(2, 14, 32, .46),
-    0 0 0 6px rgba(6, 20, 38, .12),
-    inset 0 1px 0 rgba(255, 255, 255, .70);
+    0 10px 26px rgba(2, 14, 32, .4),
+    0 0 0 5px rgba(6, 20, 38, .12);
 }
 
-/* A moldura de pinceladas das quatro bordas está em ornaments.css (.letter::after) */
-
-.glass-glow {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 15% 5%, rgba(255, 214, 92, .16), transparent 30%),
-    radial-gradient(circle at 92% 32%, rgba(83, 151, 199, .10), transparent 36%),
-    linear-gradient(180deg, rgba(255, 255, 255, .18), transparent 22%);
-}
-
-/* tudo fica acima do brilho de vidro */
-.letter > *:not(.glass-glow) {
-  position: relative;
-  z-index: 2;
-}
+/* A moldura de gradiente das quatro bordas está em ornaments.css (.letter::after) */
 
 /* ---------- tipografia ---------- */
 

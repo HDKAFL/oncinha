@@ -1,0 +1,29 @@
+/* Fio de leitura no topo da tela: cresce conforme a página é rolada. */
+
+.progresso {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  height: 3px;
+  pointer-events: none;
+  background: rgba(6, 20, 38, .28);
+}
+
+.progresso span {
+  display: block;
+  height: 100%;
+  /* animado por `transform`, que a placa de vídeo resolve sozinha — mexer na
+     largura obrigaria o navegador a recalcular o layout a cada rolagem */
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: linear-gradient(90deg, #2b6ca3 0%, #7fb0d0 38%, #f4c430 100%);
+  box-shadow: 0 0 8px rgba(244, 196, 48, .45);
+}
+
+@media (max-width: 560px) {
+  .progresso {
+    height: 2px;
+  }
+}

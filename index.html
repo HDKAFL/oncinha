@@ -7,10 +7,26 @@
   <meta name="description" content="Uma carta para Fernanda." />
   <meta name="theme-color" content="#071a33" />
   <title>grrrr</title>
+
+  <!-- Cartão que aparece quando o link é mandado no WhatsApp, Instagram, etc.
+       As URLs precisam ser absolutas: quem monta o preview é o servidor do
+       aplicativo, que não tem como resolver caminho relativo. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://hdkafl.github.io/oncinha/" />
+  <meta property="og:title" content="Para Fernanda" />
+  <meta property="og:description" content="Eu disse que faria melhor." />
+  <meta property="og:image" content="https://hdkafl.github.io/oncinha/assets/bg/preview.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🐆%3C/text%3E%3C/svg%3E" />
   <link rel="stylesheet" href="src/css/main.css" />
 </head>
 <body>
+  <!-- Quanto da carta já foi lido -->
+  <div class="progresso" aria-hidden="true"><span></span></div>
+
   <!-- Fundo fixo. O celular baixa a versão em pé; tablet e desktop, a deitada.
        Com <picture> o navegador busca só o arquivo que vai usar. -->
   <div class="painting" aria-hidden="true">

@@ -67,9 +67,7 @@
   margin: 0 0 var(--gap-p);
   color: #10243c;
   font-weight: 400;
-  /* Iowan e Palatino têm letras minúsculas mais baixas que a Georgia, então
-     o mesmo tamanho parece menor. Meio ponto compensa. */
-  font-size: clamp(17.5px, 2.5vw, 20.5px);
+  font-size: clamp(17px, 2.5vw, 20px);
 }
 
 /* ---------- blocos ---------- */

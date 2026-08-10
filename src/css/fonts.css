@@ -1,0 +1,27 @@
+/* Lora, servida pelo próprio site para que a carta apareça igual em qualquer
+   aparelho. São fontes variáveis: um arquivo cobre todos os pesos de 400 a 700,
+   em vez de um arquivo por peso.
+
+   Só o subconjunto latino foi baixado — ele já cobre todos os acentos do
+   português e as aspas tipográficas, e deixa os arquivos em ~38 KB cada.
+
+   `font-display: swap` faz o texto aparecer imediatamente na fonte do sistema
+   e trocar quando a Lora chegar: ninguém fica olhando para uma tela em branco.
+
+   Licença SIL Open Font, em assets/fonts/OFL.txt */
+
+@font-face {
+  font-family: "Lora";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../../assets/fonts/lora-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Lora";
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../../assets/fonts/lora-italic.woff2") format("woff2");
+}

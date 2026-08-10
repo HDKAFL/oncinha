@@ -15,11 +15,9 @@
   --line: rgba(23, 79, 136, .16);
   --shadow: 0 35px 100px rgba(2, 14, 32, .42);
 
-  /* Sem baixar nada: cada sistema pega a melhor serifa que já tem instalada.
-     iPhone e Mac usam a Iowan Old Style, Windows usa a Palatino Linotype,
-     e a Georgia fica como último recurso. */
-  --font-body: "Iowan Old Style", "Palatino Linotype", Palatino,
-               "Book Antiqua", Georgia, serif;
+  /* Lora, servida pelo próprio site (ver fonts.css). As do sistema aparecem
+     no primeiro instante, até o arquivo chegar. */
+  --font-body: "Lora", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
 
   /* ---- Respiro do texto (os dois botões de ajuste) ----
      --leading  espaço ENTRE AS LINHAS de um mesmo parágrafo

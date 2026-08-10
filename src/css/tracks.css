@@ -1,4 +1,5 @@
-/* Cartões de música no fim da página. Cada um abre a faixa no Spotify. */
+/* Cartões de música no fim da página. Cada um abre a faixa no Spotify.
+   A figurinha preenche o cartão inteiro e o texto fica por cima, como capa. */
 
 .playlist {
   display: grid;
@@ -15,53 +16,89 @@
 }
 
 .track {
-  position: relative;   /* o fio de gradiente é um ::after (ver ornaments.css) */
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-  padding: 18px 20px 20px;
+  justify-content: flex-end;   /* o texto assenta na base */
+  gap: 2px;
+  min-height: 132px;
+  padding: 14px 16px 14px;
   border-radius: 4px;
   text-decoration: none;
-  background: linear-gradient(135deg,
-    var(--paper-1) 0%,
-    var(--paper-2) 48%,
-    var(--paper-3) 100%);
-  -webkit-backdrop-filter: blur(22px) saturate(150%) brightness(1.28);
-  backdrop-filter: blur(22px) saturate(150%) brightness(1.28);
-  box-shadow: 0 14px 34px rgba(2, 14, 32, .28);
+  background: var(--night);    /* aparece enquanto a figurinha carrega */
+  box-shadow: 0 14px 34px rgba(2, 14, 32, .3);
   transition: transform .2s ease, box-shadow .2s ease;
 }
 
 .track:hover,
 .track:focus-visible {
   transform: translateY(-3px);
-  box-shadow: 0 20px 44px rgba(2, 14, 32, .38);
+  box-shadow: 0 20px 44px rgba(2, 14, 32, .42);
 }
 
 .track:focus-visible {
-  outline: 2px solid #d98c1d;
+  outline: 2px solid #f4c430;
   outline-offset: 3px;
 }
 
-.track-icon {
-  width: 22px;
-  height: 22px;
-  margin-bottom: 6px;
-  color: #c88a12;
+/* A figurinha, cobrindo o cartão */
+.track-art {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* As figurinhas são quadradas e o cartão é largo e baixo, então metade da
+   altura de cada uma fica de fora. O número diz que parte da imagem encostar
+   no topo: quanto MENOR, mais da parte de cima aparece.
+   Ajustado por figurinha para o rosto nunca ser cortado. */
+.track-art[src$="a-gente-nem-ficou.webp"]  { object-position: center 48%; }  /* macaquinho */
+.track-art[src$="deixa-eu-falar.webp"]     { object-position: center 30%; }  /* crianças, cabeças no alto */
+.track-art[src$="morena-das-morenas.webp"] { object-position: center 36%; }  /* rosto acima do centro */
+.track-art[src$="perdas-e-danos.webp"]     { object-position: center 34%; }  /* as duas cabeças */
+
+/* Escurecimento da base: sem isso o texto claro cai sobre uma parte
+   imprevisível da imagem e some. O topo fica quase limpo. */
+.track::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg,
+    rgba(6, 20, 38, 0) 0%,
+    rgba(6, 20, 38, .12) 38%,
+    rgba(6, 20, 38, .62) 68%,
+    rgba(6, 20, 38, .90) 100%);
+}
+
+/* o fio de gradiente da borda (ornaments.css) fica acima de tudo */
+.track::after {
+  z-index: 3;
+}
+
+.track-title,
+.track-artist {
+  position: relative;
+  z-index: 2;
 }
 
 .track-title {
-  color: #10243c;
+  color: #fff6dc;
   font-size: 1.02em;
   font-weight: 700;
   line-height: 1.25;
+  text-shadow: 0 1px 6px rgba(0, 6, 18, .7);
 }
 
 .track-artist {
-  color: #45566d;
+  color: #e2cfa4;
   font-size: .88em;
   font-style: italic;
+  text-shadow: 0 1px 6px rgba(0, 6, 18, .7);
 }
 
 @media (max-width: 560px) {
@@ -70,16 +107,9 @@
     margin-top: 20px;
   }
 
-  /* Com duas colunas numa tela estreita, o cartão fica apertado:
-     menos respiro e tipos um pouco menores para os títulos longos caberem. */
   .track {
-    padding: 14px 14px 16px;
-  }
-
-  .track-icon {
-    width: 19px;
-    height: 19px;
-    margin-bottom: 4px;
+    min-height: 116px;
+    padding: 12px 13px 12px;
   }
 
   .track-title {
